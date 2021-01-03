@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from library.models import Book, Author
-from library.serializers import BookSerializer, AuthorSerializer
+from library.models import Book, Author, Alt
+from library.serializers import BookSerializer, AuthorSerializer, AltSerializer
 
 
 @csrf_exempt

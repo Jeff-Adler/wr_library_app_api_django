@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from library.models import Book, Author
+from library.models import Book, Author, Alt
 
 
 class BookSerializer(serializers.ModelSerializer):
@@ -11,7 +11,13 @@ class BookSerializer(serializers.ModelSerializer):
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ['id', 'first_name', 'last_name']
+        fields = ['id', 'first_name', 'last_name', 'books']
+
+
+class AltSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Alt
+        fields = ['id', 'title', 'books']
 
     # id = serializers.IntegerField(read_only=True)
     # title = serializers.CharField(
