@@ -1,15 +1,9 @@
 from django.db import models
 
 
-class BookManager(models.Manager):
-    def get_by_natural_key(self, title):
-        return self.get(title=title)
-
-
 class Book(models.Model):
     title = models.CharField(
         max_length=100, blank=True, default='', unique=True)
-    # authors = models.ManyToManyField(Author)
 
     class Meta:
         ordering = ['title']
@@ -29,6 +23,7 @@ class Alt(models.Model):
     title = models.CharField(max_length=100, blank=True, default='')
     book = models.ForeignKey(Book,
                              on_delete=models.RESTRICT,
+                             related_name='alts'
                              )
 
     class Meta:

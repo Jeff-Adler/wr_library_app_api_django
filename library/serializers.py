@@ -3,11 +3,13 @@ from library.models import Book, Author, Alt
 
 
 class BookSerializer(serializers.ModelSerializer):
-    # alt_set = AltSerializer(book.alt_set.all(), many=True)
+    # authors = AuthorSerializer(book.author_set.all(), many=True)
+    # alts = AltSerializer(book.alt_set.all(), many=True)
+    alts = serializers.RelatedField(many=True, read_only=True)
 
     class Meta:
         model = Book
-        fields = ['id', 'title']
+        fields = ['id', 'title', 'alts']
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -19,7 +21,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class AltSerializer(serializers.ModelSerializer):
-    # books = BookSerializer
+    # book = BookSerializer(source='book')
+    book = serializers.RelatedField(source='book', read_only=True)
 
     class Meta:
         model = Alt
