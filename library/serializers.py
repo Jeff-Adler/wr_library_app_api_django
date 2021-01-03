@@ -3,36 +3,24 @@ from library.models import Book, Author, Alt
 
 
 class BookSerializer(serializers.ModelSerializer):
+    # alt_set = AltSerializer(book.alt_set.all(), many=True)
+
     class Meta:
         model = Book
         fields = ['id', 'title']
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    books = BookSerializer(many=True)
+
     class Meta:
         model = Author
         fields = ['id', 'first_name', 'last_name', 'books']
 
 
 class AltSerializer(serializers.ModelSerializer):
+    # books = BookSerializer
+
     class Meta:
         model = Alt
-        fields = ['id', 'title', 'books']
-
-    # id = serializers.IntegerField(read_only=True)
-    # title = serializers.CharField(
-    #     required=False, allow_blank=True, max_length=100)
-
-    # def create(self, validated_data):
-    #     """
-    #     Create and return a new `Book` instance, given the validated data.
-    #     """
-    #     return Book.objects.create(**validated_data)
-
-    # def update(self, instance, validated_data):
-    #     """
-    #     Update and return an existing `Book` instance, given the validated data.
-    #     """
-    #     instance.title = validated_data.get('title', instance.title)
-    #     instance.save()
-    #     return instance
+        fields = ['id', 'title', 'book']

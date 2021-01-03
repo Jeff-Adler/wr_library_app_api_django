@@ -1,8 +1,14 @@
 from django.db import models
 
 
+class BookManager(models.Manager):
+    def get_by_natural_key(self, title):
+        return self.get(title=title)
+
+
 class Book(models.Model):
-    title = models.CharField(max_length=100, blank=True, default='')
+    title = models.CharField(
+        max_length=100, blank=True, default='', unique=True)
     # authors = models.ManyToManyField(Author)
 
     class Meta:
@@ -16,6 +22,7 @@ class Author(models.Model):
 
     class Meta:
         ordering = ['last_name', 'first_name']
+        unique_together = [['first_name', 'last_name']]
 
 
 class Alt(models.Model):

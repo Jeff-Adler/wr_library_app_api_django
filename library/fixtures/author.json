@@ -1,0 +1,38 @@
+[
+{
+    "model": "library.author",
+    "pk": 1,
+    "fields": {
+        "first_name": "john",
+        "last_name": "doe",
+        "books": [
+            1,
+            2,
+            5
+        ]
+    }
+},
+{
+    "model": "library.author",
+    "pk": 2,
+    "fields": {
+        "first_name": "jane",
+        "last_name": "doe",
+        "books": [
+            3
+        ]
+    }
+},
+{
+    "model": "library.author",
+    "pk": 3,
+    "fields": {
+        "first_name": "bill",
+        "last_name": "dave",
+        "books": [
+            1,
+            2
+        ]
+    }
+}
+]
