@@ -4,12 +4,7 @@
     "pk": 1,
     "fields": {
         "first_name": "john",
-        "last_name": "doe",
-        "books": [
-            1,
-            2,
-            5
-        ]
+        "last_name": "doe"
     }
 },
 {
@@ -17,10 +12,7 @@
     "pk": 2,
     "fields": {
         "first_name": "jane",
-        "last_name": "doe",
-        "books": [
-            3
-        ]
+        "last_name": "doe"
     }
 },
 {
@@ -28,11 +20,15 @@
     "pk": 3,
     "fields": {
         "first_name": "bill",
-        "last_name": "dave",
-        "books": [
-            1,
-            2
-        ]
+        "last_name": "dave"
+    }
+},
+{
+    "model": "library.author",
+    "pk": 4,
+    "fields": {
+        "first_name": "jane",
+        "last_name": "dave"
     }
 }
 ]

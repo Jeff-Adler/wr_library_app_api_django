@@ -3,35 +3,57 @@
     "model": "library.book",
     "pk": 1,
     "fields": {
-        "title": "test"
+        "title": "test",
+        "authors": [
+            3,
+            4,
+            2,
+            1
+        ]
     }
 },
 {
     "model": "library.book",
     "pk": 2,
     "fields": {
-        "title": "test2"
+        "title": "test2",
+        "authors": [
+            3,
+            2
+        ]
     }
 },
 {
     "model": "library.book",
     "pk": 3,
     "fields": {
-        "title": "test3"
+        "title": "test3",
+        "authors": [
+            1
+        ]
     }
 },
 {
     "model": "library.book",
     "pk": 4,
     "fields": {
-        "title": "test3"
+        "title": "test4",
+        "authors": [
+            4,
+            1
+        ]
     }
 },
 {
     "model": "library.book",
     "pk": 5,
     "fields": {
-        "title": "test4"
+        "title": "test5",
+        "authors": [
+            3,
+            2,
+            1
+        ]
     }
 }
 ]
