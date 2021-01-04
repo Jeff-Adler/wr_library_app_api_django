@@ -10,6 +10,9 @@ class Author(models.Model):
         ordering = ['last_name', 'first_name']
         unique_together = [['first_name', 'last_name']]
 
+    def __str__(self):
+        return '%d: %s %s' % (self.id, self.first_name, self.last_name)
+
 
 class Book(models.Model):
     title = models.CharField(

@@ -2,12 +2,12 @@ from rest_framework import serializers
 from library.models import Book, Author, Alt
 
 
+class AuthorSerializer:
+    pass
+
+
 class BookSerializer(serializers.ModelSerializer):
-    # author_list = AuthorSerializer(ead_only=True, many=True)
-    authors = serializers.PrimaryKeyRelatedField(
-        queryset=Author.objects.all(), many=True)
-    # alts = AltSerializer(book.alt_set.all(), many=True)
-    # alts = serializers.RelatedField(many=True, read_only=True)
+    authors = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Book
