@@ -74,7 +74,7 @@ def author_list(request):
 @csrf_exempt
 def author_detail(request, pk):
     """
-    Retrieve, update or delete a author.
+    Retrieve, update or delete an author.
     """
     try:
         author = Author.objects.get(pk=pk)  # Primary Key
@@ -95,4 +95,50 @@ def author_detail(request, pk):
 
     elif request.method == 'DELETE':
         author.delete()
+        return HttpResponse(status=204)
+
+
+@csrf_exempt
+def alt_list(request):
+    """
+    List all alts, or create a new alt.
+    """
+    if request.method == 'GET':
+        alts = Alt.objects.all()
+        serializer = AltSerializer(alts, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        serializer = AltSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@csrf_exempt
+def alt_detail(request, pk):
+    """
+    Retrieve, update or delete an alt.
+    """
+    try:
+        alt = Alt.objects.get(pk=pk)  # Primary Key
+    except Alt.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = AltSerializer(alt)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = AltSerializer(akt, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        alt.delete()
         return HttpResponse(status=204)

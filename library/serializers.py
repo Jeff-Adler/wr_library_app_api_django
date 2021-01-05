@@ -23,8 +23,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class AltSerializer(serializers.ModelSerializer):
-    # book = BookSerializer(source='book')
-    book = serializers.RelatedField(source='book', read_only=True)
+    book = BookSerializer(read_only=True)
 
     class Meta:
         model = Alt
