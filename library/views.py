@@ -21,7 +21,6 @@ def book_list(request, format=None):
         return Response(serializer.data)
 
     elif request.method == 'POST':
-        # data = JSONParser().parse(request)
         serializer = BookSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -57,6 +56,7 @@ def book_detail(request, pk, format=None):
 
 
 @csrf_exempt
+@api_view(['GET', 'POST'])
 def author_list(request):
     """
     List all authors, or create a new author.
@@ -64,18 +64,18 @@ def author_list(request):
     if request.method == 'GET':
         authors = Author.objects.all()
         serializer = AuthorSerializer(authors, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = AuthorSerializer(data=data)
+        serializer = AuthorSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @csrf_exempt
+@api_view(['GET', 'PUT', 'DELETE'])
 def author_detail(request, pk):
     """
     Retrieve, update or delete an author.
@@ -83,26 +83,26 @@ def author_detail(request, pk):
     try:
         author = Author.objects.get(pk=pk)  # Primary Key
     except Author.DoesNotExist:
-        return HttpResponse(status=404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = AuthorSerializer(author)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = AuthorSerializer(author, data=data)
+        serializer = AuthorSerializer(author, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         author.delete()
-        return HttpResponse(status=204)
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 @csrf_exempt
+@api_view(['GET', 'POST'])
 def alt_list(request):
     """
     List all alts, or create a new alt.
@@ -110,18 +110,18 @@ def alt_list(request):
     if request.method == 'GET':
         alts = Alt.objects.all()
         serializer = AltSerializer(alts, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        return Response(serializer.data)
 
     elif request.method == 'POST':
-        data = JSONParser().parse(request)
-        serializer = AltSerializer(data=data)
+        serializer = AltSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @csrf_exempt
+@api_view(['GET', 'PUT', 'DELETE'])
 def alt_detail(request, pk):
     """
     Retrieve, update or delete an alt.
@@ -129,20 +129,19 @@ def alt_detail(request, pk):
     try:
         alt = Alt.objects.get(pk=pk)  # Primary Key
     except Alt.DoesNotExist:
-        return HttpResponse(status=404)
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = AltSerializer(alt)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
     elif request.method == 'PUT':
-        data = JSONParser().parse(request)
-        serializer = AltSerializer(akt, data=data)
+        serializer = AltSerializer(alt, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data)
-        return JsonResponse(serializer.errors, status=400)
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     elif request.method == 'DELETE':
         alt.delete()
-        return HttpResponse(status=204)
+        return Response(status=status.HTTP_204_NO_CONTENT)
