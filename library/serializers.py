@@ -2,12 +2,8 @@ from rest_framework import serializers
 from library.models import Book, Author, Alt
 
 
-class AuthorSerializer:
-    pass
-
-
 class BookSerializer(serializers.ModelSerializer):
-    authors = serializers.StringRelatedField(many=True)
+    authors = serializers.StringRelatedField(many=True, required=False)
 
     class Meta:
         model = Book
