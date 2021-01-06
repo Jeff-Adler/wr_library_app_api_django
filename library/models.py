@@ -15,7 +15,7 @@ class Author(models.Model):
 
 class Book(models.Model):
     title = models.CharField(
-        max_length=100, blank=True, default='', unique=True)
+        max_length=100, unique=True)
     authors = models.ManyToManyField(
         Author, related_name="book_list", blank=True)
 
@@ -24,8 +24,9 @@ class Book(models.Model):
 
 
 class Alt(models.Model):
-    title = models.CharField(max_length=100, blank=True, default='')
+    title = models.CharField(max_length=100)
     book = models.ForeignKey(Book,
+                             default='',
                              on_delete=models.RESTRICT,
                              related_name='alts'
                              )

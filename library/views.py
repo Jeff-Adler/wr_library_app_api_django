@@ -57,7 +57,7 @@ def book_detail(request, pk, format=None):
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-def author_list(request):
+def author_list(request, format=None):
     """
     List all authors, or create a new author.
     """
@@ -76,7 +76,7 @@ def author_list(request):
 
 @csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
-def author_detail(request, pk):
+def author_detail(request, pk, format=None):
     """
     Retrieve, update or delete an author.
     """
@@ -103,7 +103,7 @@ def author_detail(request, pk):
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-def alt_list(request):
+def alt_list(request, format=None):
     """
     List all alts, or create a new alt.
     """
@@ -114,6 +114,8 @@ def alt_list(request):
 
     elif request.method == 'POST':
         serializer = AltSerializer(data=request.data)
+        print("Serializer: ", serializer)
+        print("T/F: ", serializer.is_valid())
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -122,7 +124,7 @@ def alt_list(request):
 
 @csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
-def alt_detail(request, pk):
+def alt_detail(request, pk, format=None):
     """
     Retrieve, update or delete an alt.
     """
