@@ -19,10 +19,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class AltSerializer(serializers.ModelSerializer):
-    # book = BookSerializer()
     book = serializers.PrimaryKeyRelatedField(queryset=Book.objects)
 
     class Meta:
         model = Alt
         fields = ['id', 'title', 'book']
-        # read_only_fields = ['id']
