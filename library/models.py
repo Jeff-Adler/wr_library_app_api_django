@@ -1,6 +1,6 @@
 from django.db import models
 
-
+#comment made with the express purpose of keeping my github green
 class Author(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
